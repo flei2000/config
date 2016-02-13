@@ -33,7 +33,7 @@ item-size: 64
 Suppose we have:
 
 ```go
-func NewCache(cfg *Viper) *Cache {...}
+func NewCache(cfg *Config) *Cache {...}
 ```
 
 which creates a cache based on config information formatted as `cfg1`.
