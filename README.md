@@ -81,14 +81,21 @@ Config items in environment are merged into the internal tree when `BindEnvs()` 
 The package itself can be used as a global config:
 
 ```go
-config.ReadFiles("/home/user/.app/config.yaml", "/etc/app/config.yaml")
+config.ReadFiles("/etc/app/config.yaml")
 ```
+More than 1 file can be specified in this function:
+
+```go
+config.ReadFiles("/etc/app/config.yaml", "/home/user/.app/config.yaml")
+```
+
+The latter file will overwrite same config item in the former files.
 
 Or you can create your own instance:
 
 ```go
 cfg := config.NewConfig()
-cfg.ReadFiles("/home/user/.app/config.yaml", "/etc/app/config.yaml")
+cfg.ReadFiles("/etc/app/config.yaml", "/home/user/.app/config.yaml")
 ```
 
 ### Set Key/Values
@@ -123,7 +130,9 @@ Extract the data of a sub-tree, put it into a new Config object and return the o
 ```go
 BindEnvs(prefix string)
 ```
+
 Read all envs and merge those having `prefix` to internal tree. For example:
+
 ```bash
 bash$ export TESTCFG_APP_LOG_LEVEL=warning
 ```
@@ -135,4 +144,5 @@ config.Get("app.log.level")
 
 It should returns `warning`.
 
-
+There is no pre-defined priority of different config sources (file or env).
+Usually env should be the first priority so call this function after all config files are read.
