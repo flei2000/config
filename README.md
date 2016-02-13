@@ -1,4 +1,3 @@
-# config
 
 A GO module to parse config files.
 
@@ -76,6 +75,13 @@ Config items in environment are merged into the internal tree when `BindEnvs()` 
 - Bind pflag
 
 ## Usage
+
+### Installation
+
+```bash
+bash$ go get github.com/flei2000/config
+```
+
 ### Initialization
 
 The package itself can be used as a global config:
