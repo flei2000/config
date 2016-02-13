@@ -95,12 +95,12 @@ More than 1 file can be specified in this function:
 config.ReadFiles("/etc/app/config.yaml", "/home/user/.app/config.yaml")
 ```
 
-The latter file will overwrite same config item in the former files.
+If a key is specified in more than one file, the last value wins.
 
 Or you can create your own instance:
 
 ```go
-cfg := config.NewConfig()
+cfg := config.New()
 cfg.ReadFiles("/etc/app/config.yaml", "/home/user/.app/config.yaml")
 ```
 
@@ -151,4 +151,5 @@ config.Get("app.log.level")
 It should returns `warning`.
 
 There is no pre-defined priority of different config sources (file or env).
-Usually env should be the first priority so call this function after all config files are read.
+If a key is specified in more than 1 source, the last source wins.
+Usually env should have higher priority than files, so call this function after all config files are read.
